@@ -1,0 +1,45 @@
+﻿@model IEnumerable<MembersRegistration.Models.Relationship>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Relation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProfileCreation.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserRegistration.UserName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Relation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProfileCreation.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserRegistration.UserName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.RelationId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.RelationId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.RelationId })
+        </td>
+    </tr>
+}
+
+</table>

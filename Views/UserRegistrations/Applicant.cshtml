@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewBag.Title = "Applicant";
+}
+
+<h2>Applicant</h2>
+
+@if (Session["UserId"] != null)
+{
+    <h4>Welcome @Session["Username"]</h4>
+}
+
+<div class="form-group">
+    <div class="row">
+        <div class="col-xs-3" align="center">
+            <form method="get" action="/page2">
+                <button type="submit"> @Html.ActionLink("Profile Creation", "Create", "ProfileCreations")</button>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<div>
+    <button type="submit">@Html.ActionLink("Logout", "SignIn", "UserRegistrations")</button>
+</div>
+
+
+

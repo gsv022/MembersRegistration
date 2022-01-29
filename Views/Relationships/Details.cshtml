@@ -1,0 +1,42 @@
+﻿@model MembersRegistration.Models.Relationship
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Relationship</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Relation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Relation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProfileCreation.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProfileCreation.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserRegistration.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserRegistration.UserName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.RelationId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
