@@ -15,7 +15,6 @@ namespace MembersRegistration.Models
     public partial class Member
     {
         public long Id { get; set; }
-        public long RelationId { get; set; }
         public string members { get; set; }
     
         public virtual Relationship Relationship { get; set; }

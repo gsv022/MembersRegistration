@@ -4,13 +4,12 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="demoDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="demoDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Members">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="RelationId" Type="bigint" Nullable="false" />
           <Property Name="members" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="ProfileCreation">
@@ -30,10 +29,10 @@
           <Key>
             <PropertyRef Name="RelationId" />
           </Key>
-          <Property Name="RelationId" Type="bigint" Nullable="false" />
-          <Property Name="UserId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="bigint" />
           <Property Name="ApplicationId" Type="bigint" Nullable="false" />
-          <Property Name="Relation" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="RelationId" Type="bigint" Nullable="false" />
         </EntityType>
         <EntityType Name="UserRegistration">
           <Key>
@@ -58,8 +57,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Relationship_Members">
+          <End Role="Members" Type="Self.Members" Multiplicity="1" />
+          <End Role="Relationship" Type="Self.Relationship" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Relationship">
+              <PropertyRef Name="RelationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Relationship_UserRegistration">
-          <End Role="UserRegistration" Type="Self.UserRegistration" Multiplicity="1" />
+          <End Role="UserRegistration" Type="Self.UserRegistration" Multiplicity="0..1" />
           <End Role="Relationship" Type="Self.Relationship" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="UserRegistration">
@@ -91,6 +102,10 @@
             <End Role="ProfileCreation" EntitySet="ProfileCreation" />
             <End Role="Relationship" EntitySet="Relationship" />
           </AssociationSet>
+          <AssociationSet Name="FK_Relationship_Members" Association="Self.FK_Relationship_Members">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="Relationship" EntitySet="Relationship" />
+          </AssociationSet>
           <AssociationSet Name="FK_Relationship_UserRegistration" Association="Self.FK_Relationship_UserRegistration">
             <End Role="UserRegistration" EntitySet="UserRegistration" />
             <End Role="Relationship" EntitySet="Relationship" />
@@ -100,7 +115,8 @@
             <End Role="ProfileCreation" EntitySet="ProfileCreation" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="demoDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -109,9 +125,8 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="RelationId" Type="Int64" Nullable="false" />
           <Property Name="members" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Relationship" Relationship="Self.RelationId" FromRole="Members" ToRole="Relationship" />
+          <NavigationProperty Name="Relationship" Relationship="Self.FK_Relationship_Members" FromRole="Members" ToRole="Relationship" />
         </EntityType>
         <EntityType Name="ProfileCreation">
           <Key>
@@ -132,11 +147,11 @@
           <Key>
             <PropertyRef Name="RelationId" />
           </Key>
-          <Property Name="RelationId" Type="Int64" Nullable="false" />
-          <Property Name="UserId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int64" />
           <Property Name="ApplicationId" Type="Int64" Nullable="false" />
-          <Property Name="Relation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Members" Relationship="Self.RelationId" FromRole="Relationship" ToRole="Members" />
+          <Property Name="RelationId" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Member" Relationship="Self.FK_Relationship_Members" FromRole="Relationship" ToRole="Members" />
           <NavigationProperty Name="ProfileCreation" Relationship="Self.ApplicationId" FromRole="Relationship" ToRole="ProfileCreation" />
           <NavigationProperty Name="UserRegistration" Relationship="Self.FK_Relationship_UserRegistration" FromRole="Relationship" ToRole="UserRegistration" />
         </EntityType>
@@ -153,14 +168,14 @@
           <NavigationProperty Name="ProfileCreations" Relationship="Self.UserId" FromRole="UserRegistration" ToRole="ProfileCreation" />
           <NavigationProperty Name="Relationships" Relationship="Self.FK_Relationship_UserRegistration" FromRole="UserRegistration" ToRole="Relationship" />
         </EntityType>
-        <Association Name="RelationId">
-          <End Role="Relationship" Type="Self.Relationship" Multiplicity="1" />
-          <End Role="Members" Type="Self.Member" Multiplicity="*" />
+        <Association Name="FK_Relationship_Members">
+          <End Role="Members" Type="Self.Member" Multiplicity="1" />
+          <End Role="Relationship" Type="Self.Relationship" Multiplicity="0..1" />
           <ReferentialConstraint>
-            <Principal Role="Relationship">
-              <PropertyRef Name="RelationId" />
+            <Principal Role="Members">
+              <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Members">
+            <Dependent Role="Relationship">
               <PropertyRef Name="RelationId" />
             </Dependent>
           </ReferentialConstraint>
@@ -190,7 +205,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Relationship_UserRegistration">
-          <End Role="UserRegistration" Type="Self.UserRegistration" Multiplicity="1" />
+          <End Role="UserRegistration" Type="Self.UserRegistration" Multiplicity="0..1" />
           <End Role="Relationship" Type="Self.Relationship" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="UserRegistration">
@@ -201,14 +216,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="demoDbEntities2" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="demoDbEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Members" EntityType="Self.Member" />
           <EntitySet Name="ProfileCreations" EntityType="Self.ProfileCreation" />
           <EntitySet Name="Relationships" EntityType="Self.Relationship" />
           <EntitySet Name="UserRegistrations" EntityType="Self.UserRegistration" />
-          <AssociationSet Name="RelationId" Association="Self.RelationId">
-            <End Role="Relationship" EntitySet="Relationships" />
+          <AssociationSet Name="FK_Relationship_Members" Association="Self.FK_Relationship_Members">
             <End Role="Members" EntitySet="Members" />
+            <End Role="Relationship" EntitySet="Relationships" />
           </AssociationSet>
           <AssociationSet Name="ApplicationId" Association="Self.ApplicationId">
             <End Role="ProfileCreation" EntitySet="ProfileCreations" />
@@ -228,12 +243,11 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="demoDbModelStoreContainer" CdmEntityContainer="demoDbEntities2">
+        <EntityContainerMapping StorageEntityContainer="demoDbModelStoreContainer" CdmEntityContainer="demoDbEntities">
           <EntitySetMapping Name="Members">
             <EntityTypeMapping TypeName="demoDbModel.Member">
               <MappingFragment StoreEntitySet="Members">
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="RelationId" ColumnName="RelationId" />
                 <ScalarProperty Name="members" ColumnName="members" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -255,10 +269,10 @@
           <EntitySetMapping Name="Relationships">
             <EntityTypeMapping TypeName="demoDbModel.Relationship">
               <MappingFragment StoreEntitySet="Relationship">
-                <ScalarProperty Name="RelationId" ColumnName="RelationId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
-                <ScalarProperty Name="Relation" ColumnName="Relation" />
+                <ScalarProperty Name="RelationId" ColumnName="RelationId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

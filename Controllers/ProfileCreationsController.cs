@@ -14,7 +14,7 @@ namespace MembersRegistration.Controllers
 {
     public class ProfileCreationsController : Controller
     {
-        private demoDbEntities2 db = new demoDbEntities2();
+        private demoDbEntities db = new demoDbEntities();
 
         // GET: ProfileCreations
         public ActionResult Index()
@@ -56,9 +56,11 @@ namespace MembersRegistration.Controllers
               
         public ActionResult Create([Bind(Include = "ApplicationId,UserId,FirstName,MiddleName,LastName,Suffix,DateOfBirth,Gender")] ProfileCreation profileCreation)
         {
-            if (ModelState.IsValid)
-            {
+            
                 if (Session["UserId"] != null)
+                {
+                profileCreation.UserId = Convert.ToInt64(Session["UserId"]);
+                if (ModelState.IsValid)
                 {
                     db.ProfileCreations.Add(profileCreation);
                     MessageBox.Show("Details Saved Successfully");
@@ -97,7 +99,7 @@ namespace MembersRegistration.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(profileCreation).State = EntityState.Modified;
+                db.Entry(profileCreation).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

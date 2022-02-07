@@ -4,12 +4,12 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="8f8087fd0e4448d9a42e059d310be64b" Name="Diagram1">
-        <EntityTypeShape EntityType="demoDbModel.Member" Width="1.5" PointX="7.5" PointY="1.5" IsExpanded="true" />
+      <Diagram DiagramId="d87f1950498943fc8b4ce93d869d6e0c" Name="Diagram1">
+        <EntityTypeShape EntityType="demoDbModel.Member" Width="1.5" PointX="3" PointY="5.625" IsExpanded="true" />
         <EntityTypeShape EntityType="demoDbModel.ProfileCreation" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="demoDbModel.Relationship" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="demoDbModel.UserRegistration" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
-        <AssociationConnector Association="demoDbModel.RelationId" ManuallyRouted="false" />
+        <AssociationConnector Association="demoDbModel.FK_Relationship_Members" ManuallyRouted="false" />
         <AssociationConnector Association="demoDbModel.ApplicationId" ManuallyRouted="false" />
         <AssociationConnector Association="demoDbModel.UserId" ManuallyRouted="false" />
         <AssociationConnector Association="demoDbModel.FK_Relationship_UserRegistration" ManuallyRouted="false" />
