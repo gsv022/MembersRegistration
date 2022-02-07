@@ -9,11 +9,11 @@
 
 namespace MembersRegistration.Models
 {
-    using MembersRegistration.Infrastructure;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
+
 
     public partial class ProfileCreation
     {
@@ -22,36 +22,19 @@ namespace MembersRegistration.Models
         {
             this.Relationships = new HashSet<Relationship>();
         }
-
-        [Required(ErrorMessage = "The field is required.")]
+    
         public long ApplicationId { get; set; }
-
-        [Required(ErrorMessage = "The field is required.")]
         public long UserId { get; set; }
 
-        [StringLength(15, MinimumLength = 3, ErrorMessage = "First Name Should be min 3 and max 15 length")]
-        [Required(ErrorMessage = "The field is required.")]
         public string FirstName { get; set; }
-        [StringLength(10, MinimumLength = 3, ErrorMessage = "First Name Should be min 3 and max 10 length")]
         public string MiddleName { get; set; }
-
-        [StringLength(10, MinimumLength = 3, ErrorMessage = "First Name Should be min 3 and max 10 length")]
-        [Required(ErrorMessage = "The field is required.")]
         public string LastName { get; set; }
-
-        [Required(ErrorMessage = "The field is required.")]
         public string Suffix { get; set; }
 
-
-        
-       
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Please Provide Age")]
-        [Range(2, 100, ErrorMessage = "Age Should be min 2 and max 100")]
+        [Range(typeof(DateTime), "7/2/1966", "1/1/2022")]
         public System.DateTime DateOfBirth { get; set; }
-
-        [Required(ErrorMessage = "The field is required.")]
         public string Gender { get; set; }
-
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Relationship> Relationships { get; set; }
         public virtual UserRegistration UserRegistration { get; set; }

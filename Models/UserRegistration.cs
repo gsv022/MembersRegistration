@@ -14,6 +14,7 @@ namespace MembersRegistration.Models
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
 
+
     public partial class UserRegistration
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,21 +23,23 @@ namespace MembersRegistration.Models
             this.ProfileCreations = new HashSet<ProfileCreation>();
             this.Relationships = new HashSet<Relationship>();
         }
-
-        [Required(ErrorMessage = "The field is required.")]
+    
         public long UserId { get; set; }
 
-        [Required(ErrorMessage = "The field is required.")]
+        [DisplayName("Username")]
+        [StringLength(10)]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "The field is required.")]
+        
         public string UserName { get; set; }
 
-        
-        [Required(AllowEmptyStrings = false, ErrorMessage = "The field is required.")]
-        [RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "Please Provide Valid Email")]
+        [DisplayName("Email id")]
+        [DataType(DataType.EmailAddress, ErrorMessage = "E-mail is not valid")]
+       
         public string EmailId { get; set; }
 
-        [Required(ErrorMessage = "The field is required.")]
-        [StringLength(100, ErrorMessage = "Password \"{0}\" must have {2} character", MinimumLength = 8)]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "The field is required.")]
         [DataType(DataType.Password)]
+        [StringLength(100, ErrorMessage = "Password \"{0}\" must have {2} character", MinimumLength = 5)]
         public string Password { get; set; }
 
         [Required(ErrorMessage = "The field is required.")]
@@ -45,6 +48,7 @@ namespace MembersRegistration.Models
         [Compare("Password")]
         public string ConfirmPassword { get; set; }
         public bool IsAdmin { get; set; }
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProfileCreation> ProfileCreations { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

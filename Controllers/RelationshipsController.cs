@@ -14,6 +14,8 @@ namespace MembersRegistration.Controllers
     {
         private demoDbEntities2 db = new demoDbEntities2();
 
+         
+
         // GET: Relationships
         public ActionResult Index()
         {
@@ -53,13 +55,15 @@ namespace MembersRegistration.Controllers
         {
             if (ModelState.IsValid)
             {
+                
                 db.Relationships.Add(relationship);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Create");
             }
 
             ViewBag.ApplicationId = new SelectList(db.ProfileCreations, "ApplicationId", "FirstName", relationship.ApplicationId);
             ViewBag.UserId = new SelectList(db.UserRegistrations, "UserId", "UserName", relationship.UserId);
+
             return View(relationship);
         }
 

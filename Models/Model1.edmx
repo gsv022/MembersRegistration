@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="demoDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="demoDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Members">
           <Key>
             <PropertyRef Name="Id" />
@@ -33,7 +33,7 @@
           <Property Name="RelationId" Type="bigint" Nullable="false" />
           <Property Name="UserId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ApplicationId" Type="bigint" Nullable="false" />
-          <Property Name="Relation" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Relation" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="UserRegistration">
           <Key>
@@ -70,18 +70,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="RelationId">
-          <End Role="Relationship" Type="Self.Relationship" Multiplicity="1" />
-          <End Role="Members" Type="Self.Members" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Relationship">
-              <PropertyRef Name="RelationId" />
-            </Principal>
-            <Dependent Role="Members">
-              <PropertyRef Name="RelationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="UserId">
           <End Role="UserRegistration" Type="Self.UserRegistration" Multiplicity="1" />
           <End Role="ProfileCreation" Type="Self.ProfileCreation" Multiplicity="*" />
@@ -107,17 +95,12 @@
             <End Role="UserRegistration" EntitySet="UserRegistration" />
             <End Role="Relationship" EntitySet="Relationship" />
           </AssociationSet>
-          <AssociationSet Name="RelationId" Association="Self.RelationId">
-            <End Role="Relationship" EntitySet="Relationship" />
-            <End Role="Members" EntitySet="Members" />
-          </AssociationSet>
           <AssociationSet Name="UserId" Association="Self.UserId">
             <End Role="UserRegistration" EntitySet="UserRegistration" />
             <End Role="ProfileCreation" EntitySet="ProfileCreation" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="demoDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -152,7 +135,7 @@
           <Property Name="RelationId" Type="Int64" Nullable="false" />
           <Property Name="UserId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ApplicationId" Type="Int64" Nullable="false" />
-          <Property Name="Relation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Relation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Members" Relationship="Self.RelationId" FromRole="Relationship" ToRole="Members" />
           <NavigationProperty Name="ProfileCreation" Relationship="Self.ApplicationId" FromRole="Relationship" ToRole="ProfileCreation" />
           <NavigationProperty Name="UserRegistration" Relationship="Self.FK_Relationship_UserRegistration" FromRole="Relationship" ToRole="UserRegistration" />

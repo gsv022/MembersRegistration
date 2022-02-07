@@ -1,0 +1,29 @@
+﻿body {
+}
+.asterisk::after {
+    content: " *";
+    color: red;
+}
+.signin-btn {
+    width: 100px !important;
+    height: 40px !important;
+    margin-top: 20px;
+    font-size: 16px;
+}
+.signin-label {
+    font-size: 25px;
+    color: #337ab7;
+    margin-top: 30px;
+}
+.btn-area {
+    text-align: center;
+}
+.success-label {
+    color: green;
+    font-size: 16px;
+}
+.duplicate-label {
+    color: green;
+    font-size: 16px;
+}
+

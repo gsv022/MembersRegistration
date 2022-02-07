@@ -6,6 +6,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
+using System.Windows;
 using MembersRegistration.Models;
 
 namespace MembersRegistration.Controllers
@@ -39,7 +41,7 @@ namespace MembersRegistration.Controllers
 
         // GET: ProfileCreations/Create
 
-        
+      
         public ActionResult Create()
         {
             ViewBag.UserId = new SelectList(db.UserRegistrations, "UserId", "UserName");
@@ -49,20 +51,21 @@ namespace MembersRegistration.Controllers
         // POST: ProfileCreations/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [HttpPost]       
         [ValidateAntiForgeryToken]
-       
-        
+              
         public ActionResult Create([Bind(Include = "ApplicationId,UserId,FirstName,MiddleName,LastName,Suffix,DateOfBirth,Gender")] ProfileCreation profileCreation)
         {
             if (ModelState.IsValid)
             {
-              
-                
+                if (Session["UserId"] != null)
+                {
                     db.ProfileCreations.Add(profileCreation);
+                    MessageBox.Show("Details Saved Successfully");
                     db.SaveChanges();
-                    return RedirectToAction("Index");
-                
+                   
+                    return RedirectToAction("Create");
+                }
             }
 
             ViewBag.UserId = new SelectList(db.UserRegistrations, "UserId", "UserName", profileCreation.UserId);

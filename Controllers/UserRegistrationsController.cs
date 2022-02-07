@@ -15,6 +15,7 @@ namespace MembersRegistration.Controllers
     public class UserRegistrationsController : Controller
     {
         private demoDbEntities2 db = new demoDbEntities2();
+       
 
         // GET: UserRegistrations
         public ActionResult Index()
@@ -52,14 +53,24 @@ namespace MembersRegistration.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.UserRegistrations.Add(userRegistration);
-                db.SaveChanges();
-               
-                return RedirectToAction("Create");
+                if (db.UserRegistrations.Where(u => u.UserName == userRegistration.UserName).Any())
+                {
+                    ViewBag.DuplicateMessage = "Username already exists";
+                   
+                    return View("Create", userRegistration);
+                }
+                else
+                {
+                    db.UserRegistrations.Add(userRegistration);
+                    
+                    db.SaveChanges();
+                    ViewBag.SuccessMessage = "Registration Successful";
+                    
+                    return RedirectToAction("SignIn");
+                }
                 
             }
-            ViewBag.SuccessMessage("Registration Successful");
-            return View(userRegistration);
+            return View("SignIn");
         }
 
         // GET: UserRegistrations/Edit/5
@@ -170,19 +181,23 @@ namespace MembersRegistration.Controllers
                         return RedirectToAction("Applicant");  // User
 
                     }
+                    
 
 
                 }
 
             }
-            catch (Exception )
+            catch (Exception)
             {
-                MessageBox.Show("Username or password is wrong");
+               MessageBox.Show( "Username or password is wrong");
+                
             }
 
-
+           
             return View();
         }
+
+
 
 
         public ActionResult Admin()
@@ -217,7 +232,12 @@ namespace MembersRegistration.Controllers
         [HttpPost]
         public ActionResult Logout()
         {
+
             FormsAuthentication.SignOut();
+            // Session["UserId"] = null;
+            //  Session["UserName"] = null;
+            Session.Abandon();
+            Session.Clear();
             return RedirectToAction("SignIn", "UserRegistrations");
         }
 

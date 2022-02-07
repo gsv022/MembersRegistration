@@ -14,7 +14,7 @@ namespace MembersRegistration.Models
         public string UserName { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Password required.")]
-        [StringLength(100, ErrorMessage = "Password \"{0}\" must have {2} character", MinimumLength = 8)]
+        [StringLength(100, ErrorMessage = "Password \"{0}\" must have {2} character", MinimumLength = 5)]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 

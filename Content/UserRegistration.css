@@ -1,0 +1,27 @@
+﻿body {
+ 
+}
+
+.asterisk::after
+{
+    content: " *" ;
+    color: red;
+}
+.register-btn {
+    width: 100px !important;
+    height: 40px !important;
+    margin-top:20px;
+    font-size:16px;
+}
+.btn-area{
+    text-align:center;
+}
+.signup-label {
+    font-size: 25px;
+    color: #337ab7;
+    margin-top:30px;
+}
+.center {
+    margin: 0 auto;
+    width: 100%;
+}

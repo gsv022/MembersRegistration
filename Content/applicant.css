@@ -1,0 +1,24 @@
+﻿body {
+}
+.create-profile-area {
+    display:flex;
+    justify-content: center;
+    align-items:center;
+    margin-top:20%;
+    
+   
+}
+.create-profile-btn {
+    width: 200px !important;
+    height: 40px !important;
+    font-size: 16px;
+    background-color: #337ab7;
+    color:white !important;
+}
+.create-profile-btn>a{
+    text-decoration:none;
+    color:white;
+}
+
+
+

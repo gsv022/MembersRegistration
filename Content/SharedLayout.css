@@ -1,0 +1,41 @@
+﻿body {
+}
+
+
+
+a.app-name {
+    color: white !important;
+    font-size:25px !important;
+    text-decoration:none !important;
+    padding-top:10px !important;
+}
+
+.footer {
+    background-color: #337ab7 !important;
+    height: 50px;
+}
+.footer>p{
+    color:white;
+    font-size:16px;
+    padding:15px 5px;
+    margin-left:15px;
+}
+.footer-area  {
+    bottom:0 !important;
+    position: fixed !important;
+    width:100% !important;
+}
+.content-right{
+    padding-right:50px;
+
+}
+
+.content-right > h4 {
+    color: white !important;
+}
+.navbar-bg {
+    background-color: #337ab7 !important;
+}
+
+
+

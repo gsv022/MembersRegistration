@@ -32,7 +32,7 @@
         <th>
             @Html.DisplayNameFor(model => model.UserRegistration.UserName)
         </th>
-        <th></th>
+        <th> Action</th>
     </tr>
 
 @foreach (var item in Model) {
@@ -59,10 +59,11 @@
             @Html.DisplayFor(modelItem => item.UserRegistration.UserName)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ApplicationId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ApplicationId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ApplicationId })
-        </td>
+           <button> @Html.ActionLink("Edit", "Edit", new { id=item.ApplicationId }) </button>-
+           <button> @Html.ActionLink("Details", "Details", new { id = item.ApplicationId })</button>-
+    
+           <button> @Html.ActionLink("Delete", "Delete", new { id = item.ApplicationId })</button>
+</td>
     </tr>
 }
 
