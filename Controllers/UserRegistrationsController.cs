@@ -14,7 +14,7 @@ namespace MembersRegistration.Controllers
 {
     public class UserRegistrationsController : Controller
     {
-        private demoDbEntities2 db = new demoDbEntities2();
+        private demoDbEntities db = new demoDbEntities();
        
 
         // GET: UserRegistrations
@@ -97,7 +97,7 @@ namespace MembersRegistration.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(userRegistration).State = EntityState.Modified;
+                db.Entry(userRegistration).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -165,7 +165,7 @@ namespace MembersRegistration.Controllers
         {
             try
             {
-                using (demoDbEntities2 db = new demoDbEntities2())
+                using (demoDbEntities db = new demoDbEntities())
                 {
                     var usr = db.UserRegistrations.Single(u => u.UserName == v.UserName && u.Password == v.Password);
                     if (usr.IsAdmin == true)

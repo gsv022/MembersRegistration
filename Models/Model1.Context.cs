@@ -13,10 +13,10 @@ namespace MembersRegistration.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class demoDbEntities2 : DbContext
+    public partial class demoDbEntities : DbContext
     {
-        public demoDbEntities2()
-            : base("name=demoDbEntities2")
+        public demoDbEntities()
+            : base("name=demoDbEntities")
         {
         }
     

@@ -12,7 +12,7 @@ namespace MembersRegistration.Controllers
 {
     public class RelationshipsController : Controller
     {
-        private demoDbEntities2 db = new demoDbEntities2();
+        private demoDbEntities db = new demoDbEntities();
 
          
 
@@ -41,8 +41,11 @@ namespace MembersRegistration.Controllers
         // GET: Relationships/Create
         public ActionResult Create()
         {
-            ViewBag.ApplicationId = new SelectList(db.ProfileCreations, "ApplicationId", "FirstName");
-            ViewBag.UserId = new SelectList(db.UserRegistrations, "UserId", "UserName");
+            var userId = Convert.ToInt64(Session["UserId"]);
+
+            ViewBag.Profiles = db.ProfileCreations.Where(profile => profile.UserId == userId).ToList();
+            ViewBag.Members = db.Members.Select(x=> x.members).ToList();
+
             return View();
         }
 
@@ -93,7 +96,7 @@ namespace MembersRegistration.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(relationship).State = EntityState.Modified;
+                db.Entry(relationship).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

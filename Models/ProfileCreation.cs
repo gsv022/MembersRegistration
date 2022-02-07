@@ -11,10 +11,7 @@ namespace MembersRegistration.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.ComponentModel.DataAnnotations;
-
-
+    
     public partial class ProfileCreation
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -25,13 +22,10 @@ namespace MembersRegistration.Models
     
         public long ApplicationId { get; set; }
         public long UserId { get; set; }
-
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
         public string LastName { get; set; }
         public string Suffix { get; set; }
-
-        [Range(typeof(DateTime), "7/2/1966", "1/1/2022")]
         public System.DateTime DateOfBirth { get; set; }
         public string Gender { get; set; }
     
