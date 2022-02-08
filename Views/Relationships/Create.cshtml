@@ -1,37 +1,62 @@
-﻿@model MembersRegistration.Models.Relationship
+﻿@model  IEnumerable<MembersRegistration.Models.UpdateRelations>
 
 @{
     ViewBag.Title = "Create";
 }
 
+@*<script>
+    $(document).ready(function () {
+        $("#RelationsUpdate").click(function (e) {
 
+            e.preventDefault(); // avoid to execute the actual submit of the form.
 
+            var formData = {
+                name: $("#name").val(),
+                email: $("#email").val(),
+                superheroAlias: $("#superheroAlias").val(),
+            };
 
-@using (Html.BeginForm()) 
+            $.ajax({
+                type: "POST",
+                url: "/RelationShips",
+                data: formData, // serializes the form's elements.
+                success: function (data) {
+                    alert(data); // show response from the php script.
+                }
+            });
+
+        });
+    });
+</script>*@
+
+@using (Html.BeginForm("Create", "Relationships", FormMethod.Post, new { id = "relationform" }))
 {
     @Html.AntiForgeryToken()
-    
-<div class="form-horizontal">
-    <br />
 
-    <h4>Household Relationships</h4>
-    <hr />
+    <div class="form-horizontal">
+        <br />
+
+        <h4>Household Relationships</h4>
+        <hr />
 
 
-    @foreach (var profile in ViewBag.Profiles)
-    {
-        <div class="form-group">
-            <div class="col-md-4">Update the relationship for <b>@profile.FirstName</b></div>
-            <div class="col-md-6">@Html.DropDownListFor(model => model.RelationId, new SelectList(ViewBag.Members), htmlAttributes: new { @class = "form-control" })</div>
-        </div>
-    }
-
+        @foreach (var profile in Model)
+        {
     <div class="form-group">
-        <div class="col-md-offset-4 col-md-5">
-            <input type="submit" value="Update" class="btn btn-default" />
+        <div class="col-md-4">Update the relationship for <b>@profile.ApplicationName</b></div>
+        @Html.HiddenFor(model => profile.ApplicationId, new { @Value = profile.ApplicationId })
+        @Html.HiddenFor(model => profile.UserId, new { @Value = profile.UserId })
+        @Html.HiddenFor(model => profile.ApplicationName, new { @Value = profile.ApplicationName })
+        <div class="col-md-6">@Html.DropDownListFor(model => profile.RelationId, (SelectList)ViewBag.Members, htmlAttributes: new { @class = "form-control" })</div>
+    </div>
+        }
+
+        <div class="form-group">
+            <div class="col-md-offset-4 col-md-5">
+                <input id="RelationsUpdate" type="submit" value="Update" class="btn btn-default" />
+            </div>
         </div>
     </div>
-</div>
 
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @*<div class="form-group">

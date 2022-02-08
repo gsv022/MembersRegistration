@@ -14,9 +14,16 @@ namespace MembersRegistration.Models
     
     public partial class Member
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Member()
+        {
+            this.Relationships = new HashSet<Relationship>();
+        }
+    
         public long Id { get; set; }
         public string members { get; set; }
     
-        public virtual Relationship Relationship { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Relationship> Relationships { get; set; }
     }
 }
