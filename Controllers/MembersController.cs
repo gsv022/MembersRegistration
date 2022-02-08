@@ -17,8 +17,8 @@ namespace MembersRegistration.Controllers
         // GET: Members
         public ActionResult Index()
         {
-            var members = db.Members.Include(m => m.Relationship);
-            return View(members.ToList());
+            //var members = db.Members.Include(m => m.Relationship);
+            return View();
         }
 
         // GET: Members/Details/5
