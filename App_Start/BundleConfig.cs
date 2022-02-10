@@ -24,7 +24,7 @@ namespace MembersRegistration
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css","~/Content/UserRegistration.css"));
+                      "~/Content/site.css","~/Content/UserRegistration.css","~/Content/creation.css"));
         }
     }
 }

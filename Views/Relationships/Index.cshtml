@@ -3,37 +3,45 @@
 @{
     ViewBag.Title = "Index";
 }
+<link href="~/Content/r-index.css" rel="stylesheet" />
+<div class="nav-btn-area">
 
-<br />
-<br />
-<br />
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayName("Account Name")
-        </th>
-        <th>
-            @Html.DisplayName("Member Name")
-        </th>
-        <th>
-            @Html.DisplayName("Relationship")
-        </th>
-    </tr>
+    <a href="@Url.Action("Create", "Relationships")" class="back-btn">
+        <img src="~/Infrastructure/BackIcon.png" alt="Back" width="30" height="30" class="icon-img" />
+    </a>
+</div>
 
-@foreach (var item in Model) {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.UserRegistration.UserName)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.ProfileCreation.FirstName)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Member.members)
-    </td>
+    <br />
+    <br />
+    <br />
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayName("Account Name")
+            </th>
+            <th>
+                @Html.DisplayName("Member Name")
+            </th>
+            <th>
+                @Html.DisplayName("Relationship")
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserRegistration.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProfileCreation.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Member.members)
+                </td>
 
 
-</tr>
-}
+            </tr>
+        }
 
-</table>
+    </table>

@@ -1,9 +1,11 @@
-﻿
+﻿@model MembersRegistration.Models.ProfileCreation
 @{
     ViewBag.Title = "Admin";
 }
 
 <link href="~/Content/admin.css" rel="stylesheet" />
+
+
 <div class="profile-area">
 
     <button type="Submit" value="Submit" class="btn btn- profile-btn">  @Html.ActionLink("Create Profile", "Create", "ProfileCreations")</button>
@@ -16,7 +18,65 @@
 
 </div>
 
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MiddleName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Suffix)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateOfBirth)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gender)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserRegistration.UserName)
+        </th>
+        <th>
+    </tr>
+   @* @foreach (var item in ProfileCreations)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MiddleName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Suffix)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfBirth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserRegistration.UserName)
+            </td>
+            <td>
+                <button> @Html.ActionLink("Edit", "Edit", new { id = item.ApplicationId }) </button>-
+                <button> @Html.ActionLink("Details", "Details", new { id = item.ApplicationId })</button>-
 
+                <button> @Html.ActionLink("Delete", "Delete", new { id = item.ApplicationId })</button>
+            </td>
+        </tr>
+    }*@
+
+</table>
 
 
 

@@ -36,6 +36,22 @@ a.app-name {
 .navbar-bg {
     background-color: #337ab7 !important;
 }
+.search-link{
+    text-decoration:none !important;
+    color:#FFFFFF !important;
+    
+
+}
+.search-item{
+    padding-top:17px !important;
+ 
+}
+.Logout-btn {
+    color: #FFFFFF !important;
+    text-decoration: none !important;
+    background-color: #337ab7 !important;
+
+}
 
 
 

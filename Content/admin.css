@@ -4,7 +4,8 @@
     display: flex !important;
     justify-content: center !important;
     align-items: center !important;
-    margin-top: 12%;
+    margin-top: 5%;
+    margin-right:70%;
 }
 
 .profile-btn {
@@ -24,7 +25,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 12%;
+    margin-top: 1px;
+    margin-left:auto;
 }
 
 .search-btn {
@@ -33,6 +35,7 @@
     font-size: 16px;
     background-color: #337ab7;
     color: white !important;
+    margin-top:1px;
 }
 
 .search-btn > a {

@@ -2,26 +2,33 @@
 
 @{
     ViewBag.Title = "Create";
+
 }
 
-@*Profile Creation*@
 
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    <link href="~/Content/creation.css" rel="stylesheet" />
-
-    <div>
 
 
-        <button type="submit" class="btn btn-primary back-btn">@Html.ActionLink("Back", "Applicant", "UserRegistrations")</button>
-    </div>
+
+<div class="nav-btn-area">
+
+    <a href="@Url.Action("Applicant","UserRegistrations")" class="back-btn">
+        <img src="~/Infrastructure/BackIcon.png" alt="Back" width="30" height="30" class="icon-img" />
+    </a>
+
+    <a  href="@Url.Action("Create", "Relationships")" class="next-btn">
+        <img src="~/Infrastructure/NextIcon.png" alt="Next" width="30" height="30" class="icon-img"/>
+    </a>
+
+</div>
 
 
     <div class="form-horizontal">
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-3 btn-area signup-label">
+            <div class="col-md-offset-2 col-md-3  btn-area signup-label">
                 Add Member
             </div>
         </div>
@@ -32,13 +39,13 @@
 
         @*<div class="form-group">
 
-            @Html.LabelFor(model => model.UserId, htmlAttributes: new { @class = "control-label col-md-2 asterisk" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.UserId, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger", })
+                @Html.LabelFor(model => model.UserId, htmlAttributes: new { @class = "control-label col-md-2 asterisk" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.UserId, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger", })
 
-            </div>
-        </div>*@
+                </div>
+            </div>*@
         <div class="form-group">
 
             @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2 asterisk" })
@@ -64,7 +71,7 @@
             </div>
         </div>
 
-        <div class="form-group ">
+        <div class="form-group">
             @Html.LabelFor(model => model.Suffix, htmlAttributes: new { @class = "control-label col-md-2 asterisk " })
             <div class="col-md-10 suffix-dropdown">
 
@@ -104,11 +111,7 @@
 
 
 }
-<div>
 
-
-    <button type="submit" class="btn btn-primary back-btn">@Html.ActionLink("Next", "Create", "Relationships")</button>
-</div>
 
 
 

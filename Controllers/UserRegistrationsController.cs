@@ -57,6 +57,7 @@ namespace MembersRegistration.Controllers
                 {
                     ViewBag.DuplicateMessage = "Username already exists";
                    
+                   
                     return View("Create", userRegistration);
                 }
                 else
@@ -70,7 +71,8 @@ namespace MembersRegistration.Controllers
                 }
                 
             }
-            return View("SignIn");
+            ModelState.Clear();
+            return View("Create");
         }
 
         // GET: UserRegistrations/Edit/5
@@ -187,13 +189,12 @@ namespace MembersRegistration.Controllers
                 }
 
             }
-            catch (Exception)
+            catch (Exception e)
             {
-               MessageBox.Show( "Username or password is wrong");
+               MessageBox.Show( "Username or password is wrong" + e);
                 
             }
 
-           
             return View();
         }
 
@@ -237,9 +238,12 @@ namespace MembersRegistration.Controllers
             // Session["UserId"] = null;
             //  Session["UserName"] = null;
             Session.Abandon();
-            Session.Clear();
+            
             return RedirectToAction("SignIn", "UserRegistrations");
         }
+
+
+       
 
 
 
