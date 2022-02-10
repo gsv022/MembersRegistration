@@ -9,6 +9,15 @@
             return !~text.indexOf(val);
         }).hide();
     });
+
+
+
+});
+
+$(function () {
+    $(".checkbox").click(function () {
+        $('.delete').prop('disabled', $('input.checkbox:checked').length == 0);
+    });
 });
 
 

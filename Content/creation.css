@@ -19,11 +19,11 @@
 }
 .save-btn,.exit-btn {
     margin-top: 20px;
-    font-size: 12px;
+    font-size: 14px;
 }
 .exit-btn >a, .back-btn>a {
         text-decoration: none;
-        font-size: 12px;
+        font-size: 14px;
         color: white;
     }
 .nav-btn-area {
