@@ -48,9 +48,7 @@ a.app-name {
 }
 .Logout-btn {
     color: #FFFFFF !important;
-    text-decoration: none !important;
-    background-color: #337ab7 !important;
-
+    float: right;
 }
 
 

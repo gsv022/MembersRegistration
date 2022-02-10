@@ -41,7 +41,7 @@ namespace MembersRegistration.Controllers
         // GET: Relationships/Create
         public ActionResult Create()
         {
-            var userId = Convert.ToInt64(Session["UserId"]);
+            var userId = GlobalVaribales.UserId;
 
             ViewBag.UserId = userId;
             ViewBag.Profiles = db.ProfileCreations.Where(profile => profile.UserId == userId).ToList();

@@ -43,3 +43,28 @@
     color: white;
 }
 
+.search{
+    margin-top:40px;
+}
+
+.search-text {
+   min-width: 100%;
+   height:40px;
+}
+
+::-webkit-input-placeholder {
+    text-align: center;
+    font-size:18px;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+    text-align: center;
+}
+
+::-moz-placeholder { /* Firefox 19+ */
+    text-align: center;
+}
+
+:-ms-input-placeholder {
+    text-align: center;
+}
