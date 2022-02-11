@@ -4,6 +4,7 @@
     font-size: 20px;
     color: #337ab7;
     margin-top: 40px;
+    margin-left:20%;
 }
 .asterisk::after {
     content: " *";
@@ -41,7 +42,7 @@
 .submit-label {
     font-size: 20px;
     color: #337ab7;
-    margin-top: 30px;
+    margin-left: 40%;
 }
 .nav-btn-area {
     width: 100% !important;

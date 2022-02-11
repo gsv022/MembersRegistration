@@ -14,34 +14,18 @@ namespace MembersRegistration.Controllers
 {
     public class ProfileCreationsController : Controller
     {
-        private demoDbEntities db = new demoDbEntities();
+        private readonly demoDbEntities db;
 
-        // GET: ProfileCreations
-        public ActionResult Index()
-        { 
-                var profileCreations = db.ProfileCreations.Include(p => p.UserRegistration);
-                return View(profileCreations.ToList());
-            
-        }
-
-        // GET: ProfileCreations/Details/5
-        public ActionResult Details(long? id)
+        public ProfileCreationsController()
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            ProfileCreation profileCreation = db.ProfileCreations.Find(id);
-            if (profileCreation == null)
-            {
-                return HttpNotFound();
-            }
-            return View(profileCreation);
+            this.db = new demoDbEntities();
         }
 
-        // GET: ProfileCreations/Create
+        public ActionResult Index()
+        {
+            return View();
+        }
 
-      
         public ActionResult Create()
         {
             ViewBag.UserId = new SelectList(db.UserRegistrations, "UserId", "UserName");
@@ -63,9 +47,9 @@ namespace MembersRegistration.Controllers
                 if (ModelState.IsValid)
                 {
                     db.ProfileCreations.Add(profileCreation);
-                    MessageBox.Show("Details Saved Successfully");
+                    //MessageBox.Show("Details Saved Successfully");
                     db.SaveChanges();
-                   
+
                     return RedirectToAction("Create");
                 }
             }
@@ -73,66 +57,6 @@ namespace MembersRegistration.Controllers
             ViewBag.UserId = new SelectList(db.UserRegistrations, "UserId", "UserName", profileCreation.UserId);
             return View(profileCreation);
         }
-
-        // GET: ProfileCreations/Edit/5
-        public ActionResult Edit(long? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            ProfileCreation profileCreation = db.ProfileCreations.Find(id);
-            if (profileCreation == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.UserId = new SelectList(db.UserRegistrations, "UserId", "UserName", profileCreation.UserId);
-            return View(profileCreation);
-        }
-
-        // POST: ProfileCreations/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ApplicationId,UserId,FirstName,MiddleName,LastName,Suffix,DateOfBirth,Gender")] ProfileCreation profileCreation)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(profileCreation).State = System.Data.Entity.EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.UserId = new SelectList(db.UserRegistrations, "UserId", "UserName", profileCreation.UserId);
-            return View(profileCreation);
-        }
-
-        // GET: ProfileCreations/Delete/5
-        public ActionResult Delete(long? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            ProfileCreation profileCreation = db.ProfileCreations.Find(id);
-            if (profileCreation == null)
-            {
-                return HttpNotFound();
-            }
-            return View(profileCreation);
-        }
-
-        // POST: ProfileCreations/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(long id)
-        {
-            ProfileCreation profileCreation = db.ProfileCreations.Find(id);
-            db.ProfileCreations.Remove(profileCreation);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -141,8 +65,5 @@ namespace MembersRegistration.Controllers
             }
             base.Dispose(disposing);
         }
-
-       
-
     }
 }
