@@ -11,7 +11,9 @@ namespace MembersRegistration.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Member
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,10 +21,13 @@ namespace MembersRegistration.Models
         {
             this.Relationships = new HashSet<Relationship>();
         }
-    
+        [Required]
         public long Id { get; set; }
+        [Required]
         public string members { get; set; }
-    
+
+        [Required]
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Relationship> Relationships { get; set; }
     }

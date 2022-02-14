@@ -132,5 +132,7 @@ namespace MembersRegistration.Controllers
             Session.Abandon();
             return RedirectToAction("SignIn", "UserRegistrations");
         }
+
+        
     }
 }

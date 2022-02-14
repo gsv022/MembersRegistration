@@ -16,6 +16,8 @@ namespace MembersRegistration.Controllers
     {
         private readonly demoDbEntities db;
 
+     
+
         public ProfileCreationsController()
         {
             this.db = new demoDbEntities();
@@ -37,6 +39,7 @@ namespace MembersRegistration.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]       
         [ValidateAntiForgeryToken]
+        
               
         public ActionResult Create([Bind(Include = "ApplicationId,UserId,FirstName,MiddleName,LastName,Suffix,DateOfBirth,Gender")] ProfileCreation profileCreation)
         {
@@ -47,16 +50,17 @@ namespace MembersRegistration.Controllers
                 if (ModelState.IsValid)
                 {
                     db.ProfileCreations.Add(profileCreation);
-                    //MessageBox.Show("Details Saved Successfully");
                     db.SaveChanges();
-
                     return RedirectToAction("Create");
                 }
             }
 
             ViewBag.UserId = new SelectList(db.UserRegistrations, "UserId", "UserName", profileCreation.UserId);
+            ViewBag.SuccessMessage = "Details saved successfully";
             return View(profileCreation);
         }
+        
+       
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -65,5 +69,23 @@ namespace MembersRegistration.Controllers
             }
             base.Dispose(disposing);
         }
+        enum Status { 
+            Inprogress,
+            Submitted,
+            Approved
+        }
+        public ActionResult Approve(ProfileCreation q)
+        {
+             var user = db.UserRegistrations.Single(u => u.IsAdmin==true );
+            if (user.IsAdmin == true)
+            {
+                Console.WriteLine(Status.Approved);
+                
+            }
+            return View("Admin");
+        }
+
+
+  
     }
 }

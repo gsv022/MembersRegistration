@@ -5,6 +5,11 @@
 }
 <link href="~/Content/relationship.css" rel="stylesheet" />
 
+<div class="nav-btn-area">
+    <a href="@Url.Action("Create","ProfileCreations")" class="back-btn">
+        <img src="~/Infrastructure/BackIcon.png" alt="Back" width="20" height="20" class="home-icon" />
+    </a>
+</div>
 
 
 
@@ -14,43 +19,58 @@
     @Html.AntiForgeryToken()
     <br />
     @*<div class="nav-btn-area">
-        <a href="@Url.Action("Create","ProfileCreations")" class="back-btn">
-            <img src="~/Infrastructure/BackIcon.png" alt="Back" width="30" height="30" class="icon-img" />
-        </a>
-        <a href="@Url.Action("Create", "Relationships")" class="next-btn">
-            <img src="~/Infrastructure/NextIcon.png" alt="Next" width="30" height="30" class="icon-img" />
-        </a>
-    </div>*@
+            <a href="@Url.Action("Create","ProfileCreations")" class="back-btn">
+                <img src="~/Infrastructure/BackIcon.png" alt="Back" width="30" height="30" class="icon-img" />
+            </a>
+            <a href="@Url.Action("Create", "Relationships")" class="next-btn">
+                <img src="~/Infrastructure/NextIcon.png" alt="Next" width="30" height="30" class="icon-img" />
+            </a>
+        </div>*@
 
     <div class="form-horizontal">
-        <div class="form-group">
-            <div class="col-md-12 relation-label">
-                Application Id :
-                @Html.DisplayFor(model => Model.First().UserId, new { @Value = Model.First().ApplicationId })
-                     , No. members added : @Model.ToList().Count() 
-            </div>
-        </div>
+        @*  <div class="form-group">
+                <div class="col-md-12 relation-label">
+                    Application Id :
+                    @Html.DisplayFor(model => Model.First().UserId, new { @Value = Model.First().ApplicationId })
+                    , No. members added : @Model.ToList().Count()
+                </div>
+            </div>*@
         @foreach (var profile in Model)
         {
             <div class="form-group">
-                <div class="control-label col-md-4 asterisk"> Relationship with <b>@profile.ApplicationName</b></div>
+                <div class="control-label col-md-4  asterisk" title="Relationship"> Relationship with <b>@profile.ApplicationName</b></div>
                 @Html.HiddenFor(model => profile.ApplicationId, new { @Value = profile.ApplicationId })
                 @Html.HiddenFor(model => profile.UserId, new { @Value = profile.UserId })
                 @Html.HiddenFor(model => profile.ApplicationName, new { @Value = profile.ApplicationName })
                 <div class="col-md-8 relationslist-dropdown">
-                @Html.DropDownListFor(model => profile.RelationId, (SelectList)ViewBag.Members, htmlAttributes: new { @class = "form-control" })</div>
+                    @Html.DropDownListFor(model => profile.RelationId, (SelectList)ViewBag.Members, htmlAttributes: new { @class = "form-control" })
                 </div>
+            </div>
         }
 
-        
+    @*    @if (ViewBag.SuccessMessage != null)
+        {
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <label class="label-success">@ViewBag.SuccessMessage</label>
+                </div>
+            </div>
+
+        }*@
+
+
+    </div>
+    <div class="form-group">
+        <div class="col-md-10  submit-label">
+            <div>@ViewData["error"]</div>
+            <button id="RelationsUpdate" type="Submit" value="save"ng- title="Submit" class="btn btn-primary save-btn">Submit Application</button>
+        </div>
     </div>
 
+
+
 }
-<div class="form-group">
-    <div class="col-md-10  submit-label">
-        <button id="RelationsUpdate" type="Submit" value="Save" class="btn btn-primary save-btn">Submit Application</button>
-    </div>
-</div>
+
 
 
 @section Scripts {

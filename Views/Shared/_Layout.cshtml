@@ -17,52 +17,60 @@
     <nav class="navbar bg-primary navbar-fixed-top justify-content-between">
 
         <div class="navbar-brand">
-            @Html.ActionLink("Household Management System", "Index", "Home", new { area = "" }, new { @class = "app-name" })
+            @if (Session["UserId"] != null)
+            {
+                <a href="@Url.Action("Admin", "UserRegistrations")" class="back-btn">
+                    <img src="~/Infrastructure/home.png" alt="Back" title="Home" class="home-icon" />
+                </a>
+            }
+
+            @Html.ActionLink("Household Management System", "SignIn", "UserRegistrations", new { area = "" }, new { @class = "app-name" })
 
 
         </div>
-       
+
 
         <div class="navbar-right content-right">
             @if (Session["UserId"] != null)
             {
 
                 <h4> Welcome @Session["Username"]! </h4>
-                    <a class="Logout-btn" href="/UserRegistrations/SignIn">Logout</a>
-                        }
+                <a class="Logout-btn" href="/UserRegistrations/SignIn">Logout</a>
+            }
 
 
-                    </div>
-
-
-
-
-
-                </nav>
-                <div class="container body-content">
-                    <section class="content-wrapper main-content ">
-                        @RenderBody()
-                    </section>
-                </div>
+        </div>
 
 
 
-                <div class="footer-area ">
-
-                    <footer class="footer">
-                        <p>&copy; @DateTime.Now.Year Mindtree</p>
-                    </footer>
-                </div>
 
 
+    </nav>
+    <div class="container body-content">
+        <section class="content-wrapper main-content ">
+            @RenderBody()
+        </section>
+    </div>
 
-                @Scripts.Render("~/bundles/jquery")
-                @Scripts.Render("~/bundles/bootstrap")
-                @RenderSection("scripts", required: false)
 
-            </body>
+
+    <div class="footer-area ">
+
+        <footer class="footer">
+            <p>&copy; @DateTime.Now.Year Mindtree</p>
+        </footer>
+    </div>
+
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+
+</body>
 
             </html>
 
 
-            @*@Html.ActionLink("User search", "Index", "Home") *@
+         

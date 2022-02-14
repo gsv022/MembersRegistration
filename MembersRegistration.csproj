@@ -189,6 +189,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Infrastructure\BackIcon.png" />
+    <Content Include="Infrastructure\home.png" />
     <Content Include="Infrastructure\NextIcon.png" />
     <Content Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -262,7 +263,6 @@
     <Content Include="Views\UserRegistrations\Applicant.cshtml" />
     <Content Include="Views\Shared\_Header.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
-    <Content Include="Views\Sweet\Alert.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

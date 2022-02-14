@@ -6,26 +6,6 @@
 
 <link href="~/Content/admin.css" rel="stylesheet" />
 
-@*<script>
-    function myFunction() {
-      var input, filter, table, tr, td, i, txtValue;
-      input = document.getElementById("myInput");
-      filter = input.value.toUpperCase();
-      table = document.getElementById("myTable");
-      tr = table.getElementsByTagName("tr");
-      for (i = 0; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName("td")[1];
-        if (td) {
-          txtValue = td.textContent || td.innerText;
-          if (txtValue.toUpperCase().indexOf(filter) > -1) {
-            tr[i].style.display = "";
-          } else {
-            tr[i].style.display = "none";
-          }
-        }
-      }
-        }
-    </script>*@
 
 <br />
 <br />
@@ -39,7 +19,7 @@
         {
             <div class="col-md-9">
                 @*<input  id="myInput" class="search-text" placeholder="Search Members" onkeyup="myFunction()" type="text" />*@
-                <input id="myInput" class="search-text" placeholder="Search Applications" type="text" />
+                <input id="myInput" class="search-text" placeholder="Search Application" type="text" />
             </div>
         }
         @*<div class="col-md-4">
@@ -92,60 +72,74 @@
     </th>
     @foreach (var item in Model)
     {
-        <tr>
-            @if (@ViewBag.IsAdmin && !item.Status)
-            {
-                <td>
-                    @Html.CheckBoxFor(modelItem => item.Status, new { @class = "checkbox" })
-                </td>
-            }
+<tr>
+    @if (@ViewBag.IsAdmin && !item.Status)
+    {
+        <td>
+            @Html.CheckBoxFor(modelItem => item.Status, new { @class = "checkbox" })
+        </td>
+    }
 
-            @if (@ViewBag.IsAdmin)
-            {
-                <td>
-                    @Html.DisplayFor(modelItem => item.ApplicationId, new { @class = "applicationId" })
-                </td>
-            }
-            <td>
-                @Html.DisplayFor(modelItem => item.Suffix)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MiddleName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateOfBirth)
-            </td>
+    @if (@ViewBag.IsAdmin)
+    {
+        <td>
+            @Html.DisplayFor(modelItem => item.ApplicationId, new { @class = "applicationId" })
+        </td>
+    }
 
-            <td>
-                @Html.DisplayFor(modelItem => item.Gender)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserRegistration.UserName)
-            </td>
-            <td>
-                @Html.DisplayName("Submitted")
-            </td>
 
-            @*<td>
-                    <button> @Html.ActionLink("Edit", "Edit", new { id = item.ApplicationId }) </button>-
-                    <button> @Html.ActionLink("Details", "Details", new { id = item.ApplicationId })</button>-
+    <td>
+        @Html.DisplayFor(modelItem => item.Suffix)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.FirstName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.MiddleName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.LastName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.DateOfBirth)
+    </td>
 
-                    <button> @Html.ActionLink("Delete", "Delete", new { id = item.ApplicationId })</button>
-                </td>*@
-        </tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Gender)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.UserRegistration.UserName)
+    </td>
+    @if (@ViewBag.IsAdmin && item.Status == false)
+    {
+        <td>
+            @Html.DisplayName("Submitted")
+        </td>
+    }
+    @if (!(@ViewBag.IsAdmin) && item.Status == false)
+    {
+        <td>
+            @Html.DisplayName("In progress")
+        </td>
+    }
+    
+    
+
+
+    @*<td>
+            <button> @Html.ActionLink("Edit", "Edit", new { id = item.ApplicationId }) </button>-
+            <button> @Html.ActionLink("Details", "Details", new { id = item.ApplicationId })</button>-
+
+            <button> @Html.ActionLink("Delete", "Delete", new { id = item.ApplicationId })</button>
+        </td>*@
+</tr>
     }
 </table>
 
 <div class="col-md-12">
     @if (@ViewBag.IsAdmin)
     {
-    <div style="margin-left: 80%;" class="col-md-3">
+    <div style="margin-left: 76%;" class="col-md-3">
         <button type="Submit" value="Submit" disabled="disabled" class="delete btn btn- profile-btn">  @Html.ActionLink("Approve", "Approve", "ProfileCreations")</button>
     </div>
     }    

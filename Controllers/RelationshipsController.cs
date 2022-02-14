@@ -84,31 +84,27 @@ namespace MembersRegistration.Controllers
                 var orgRelationship = db.Relationships.SingleOrDefault(x=> x.ApplicationId == appId);
 
                 if (orgRelationship == null)
-                {
                     db.Relationships.Add(relationship);
-                }
                 else
-                {
                     orgRelationship.RelationId = relationship.RelationId;
-                }
+
+                var updateStatusForProfiles = db.ProfileCreations.SingleOrDefault(x => x.ApplicationId == appId);
+                updateStatusForProfiles.Status = true;
 
                 db.SaveChanges();
+                ViewData["error"] = "Relation updated successfully";
+
             }
 
             if (ModelState.IsValid)
             {
-                //foreach(var relationship in relationshipList.ToList())
-                //{
-                //    db.Relationships.Add(relationship);
-                //    db.SaveChanges();
-                //}
-
+                
                 return RedirectToAction("Create");
             }
 
             ViewBag.ApplicationId = new SelectList(db.ProfileCreations, "ApplicationId", "FirstName");
             ViewBag.UserId = new SelectList(db.UserRegistrations, "UserId", "UserName");
-
+            ViewData["error"] = "Relation updated successfully";
             return View();
         }
 
