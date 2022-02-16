@@ -24,7 +24,7 @@
                 @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2 asterisk" })
 
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control",placeholder="User Name" } })
                     @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -32,7 +32,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.EmailId, htmlAttributes: new { @class = "control-label col-md-2 asterisk" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.EmailId, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.EmailId, new { htmlAttributes = new { @class = "form-control", placeholder = "Email id" } })
                     @Html.ValidationMessageFor(model => model.EmailId, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -40,7 +40,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2 asterisk" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", placeholder = "Password" } })
                     @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -48,7 +48,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "control-label col-md-2 asterisk " })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control", placeholder = " Confirm Password" } })
                     @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -92,7 +92,7 @@
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-3 btn-area">
-                    <button type="Submit" value="Submit" class="btn btn-primary register-btn" data-toggle="modal" data-target="#exampleModalCenter">
+                    <button type="Submit" value="Submit" title="Register" class="btn btn-primary register-btn" data-toggle="modal" data-target="#exampleModalCenter">
                         Register
                     </button>
 

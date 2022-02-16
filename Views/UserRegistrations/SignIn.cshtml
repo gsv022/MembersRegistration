@@ -25,7 +25,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2 asterisk" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", placeholder = "User Name" } })
                         @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -33,7 +33,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2 asterisk" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", placeholder = "Password" } })
                         @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -57,11 +57,11 @@
                 }
 
 
-                @if (ViewBag.DuplicateMessage != null)
+                @if (ViewBag.DuplMessage != null)
                 {
                     <div class="form-group">
-                        <div class="col-md-offset-2 col-md-3 duplicate-label">
-                            <label>@ViewBag.DuplicateMessage</label>
+                        <div class="col-md-offset-2 col-md-3 danger">
+                            <label class="label-danger">@ViewBag.DuplMessage</label>
                         </div>
                     </div>
                 }
@@ -70,7 +70,7 @@
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-3 btn-area">
 
-                        <button type="Submit" value="Submit"title="Signin" class="btn btn-primary signin-btn">Sign in</button>
+                        <button type="Submit" value="Submit" title="Signin" class="btn btn-primary signin-btn">Sign in</button>
 
                     </div>
                 </div>

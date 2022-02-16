@@ -95,10 +95,11 @@ namespace MembersRegistration.Controllers
 
                     return RedirectToAction("Admin");  // User
             }
-            catch (Exception e)
+            catch (Exception )
             {
-               MessageBox.Show( "Username or password is wrong" + e);
-                
+                //MessageBox.Show( "Username or password is wrong" );
+                ViewBag.DuplMessage = "Username or password is wrong";
+
             }
 
             return View();

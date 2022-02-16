@@ -51,12 +51,13 @@ namespace MembersRegistration.Controllers
                 {
                     db.ProfileCreations.Add(profileCreation);
                     db.SaveChanges();
+                    ViewBag.SuccessMessage = "Details saved successfully";
                     return RedirectToAction("Create");
                 }
             }
 
             ViewBag.UserId = new SelectList(db.UserRegistrations, "UserId", "UserName", profileCreation.UserId);
-            ViewBag.SuccessMessage = "Details saved successfully";
+           
             return View(profileCreation);
         }
         
@@ -69,12 +70,9 @@ namespace MembersRegistration.Controllers
             }
             base.Dispose(disposing);
         }
-        enum Status { 
-            Inprogress,
-            Submitted,
-            Approved
-        }
-        public ActionResult Approve(ProfileCreation q)
+        
+        
+      /*  public ActionResult Approve(ProfileCreation q)
         {
              var user = db.UserRegistrations.Single(u => u.IsAdmin==true );
             if (user.IsAdmin == true)
@@ -83,7 +81,7 @@ namespace MembersRegistration.Controllers
                 
             }
             return View("Admin");
-        }
+        }*/
 
 
   

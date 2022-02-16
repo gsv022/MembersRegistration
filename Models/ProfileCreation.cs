@@ -38,6 +38,7 @@ namespace MembersRegistration.Models
         public string LastName { get; set; }
 
         [Required(ErrorMessage = "The field is required.")]
+        [DisplayName("Salutation")]
         public string Suffix { get; set; }
 
         [Required(ErrorMessage = "The field is required.")]
