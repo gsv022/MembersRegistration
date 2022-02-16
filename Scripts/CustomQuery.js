@@ -1,5 +1,5 @@
-﻿$(document).ready(function () {
-    var $rows = $('#myTable tr');
+﻿$(function () {
+    var $rows = $('#myTable tr').slice(1);
 
     $('#myInput').keyup(function () {
         var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
@@ -9,9 +9,6 @@
             return !~text.indexOf(val);
         }).hide();
     });
-
-
-
 });
 
 $(function () {
@@ -21,4 +18,29 @@ $(function () {
 });
 
 
+var applicationIds = new Array();
 
+$(function () {
+$("#btn-approve").on("click", function () {
+
+    $("input:checkbox").each(function () {
+        if ($(this).is(":checked")) {
+            applicationIds.push($(this).attr("value"));
+        }
+    });
+
+    $.ajax({
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        url: "/ProfileCreations/Post",
+        data: JSON.stringify({'applicationIds': applicationIds}),
+            dataType: "json",
+            success: function (data) {
+                alert("The selected applications are approved");
+            },
+            error: function (xhr, err) {
+                alert(err);
+            }
+        })
+});
+});

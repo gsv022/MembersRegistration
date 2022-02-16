@@ -92,6 +92,9 @@ namespace MembersRegistration.Controllers
                     orgRelationship.RelationId = relationship.RelationId;
                 }
 
+                var updateStatus = db.ProfileCreations.SingleOrDefault(x => x.ApplicationId == appId);
+                updateStatus.Status = 1; //Submitted
+
                 db.SaveChanges();
             }
 

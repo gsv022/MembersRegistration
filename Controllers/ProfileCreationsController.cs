@@ -57,6 +57,32 @@ namespace MembersRegistration.Controllers
             ViewBag.UserId = new SelectList(db.UserRegistrations, "UserId", "UserName", profileCreation.UserId);
             return View(profileCreation);
         }
+
+        [HttpPost]
+        public ActionResult Post(IEnumerable<string> applicationIds)
+        {
+            try
+            {
+                for (int i = 0; i < applicationIds.Count(); i++)
+                {
+                    var appId = Convert.ToInt64(applicationIds.ToList()[i]);
+
+                    var updateStatus = db.ProfileCreations.SingleOrDefault(x => x.ApplicationId == appId);
+                    updateStatus.Status = 2; //Approved
+
+                    db.SaveChanges();
+                }
+
+                return Json(new { success = true });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { error = true });
+
+            }
+
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

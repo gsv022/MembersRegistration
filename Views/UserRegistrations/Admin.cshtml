@@ -90,13 +90,18 @@
     <th>
         @Html.DisplayName("Status")
     </th>
+    @{
+        string status = "In-Progress";
+     }
+
     @foreach (var item in Model)
     {
+        status = item.Status == 0 ? "In-Progress" : item.Status == 1 ? "Submitted" : "Approved";
         <tr>
-            @if (@ViewBag.IsAdmin && !item.Status)
+            @if (@ViewBag.IsAdmin)
             {
                 <td>
-                    @Html.CheckBoxFor(modelItem => item.Status, new { @class = "checkbox" })
+                    @Html.CheckBox("Status", new { @class = "checkbox", @value = item.ApplicationId })
                 </td>
             }
 
@@ -129,7 +134,7 @@
                 @Html.DisplayFor(modelItem => item.UserRegistration.UserName)
             </td>
             <td>
-                @Html.DisplayName("Submitted")
+                @Html.DisplayName(status)
             </td>
 
             @*<td>
@@ -146,7 +151,7 @@
     @if (@ViewBag.IsAdmin)
     {
     <div style="margin-left: 80%;" class="col-md-3">
-        <button type="Submit" value="Submit" disabled="disabled" class="delete btn btn- profile-btn">  @Html.ActionLink("Approve", "Approve", "ProfileCreations")</button>
+        <button type="Submit" id="btn-approve" value="Submit" disabled="disabled" class="delete btn btn- profile-btn">Approve</button>
     </div>
     }    
 </div>

@@ -28,7 +28,7 @@ namespace MembersRegistration.Models
         public string Suffix { get; set; }
         public System.DateTime DateOfBirth { get; set; }
         public string Gender { get; set; }
-        public bool Status { get; set; }
+        public int Status { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Relationship> Relationships { get; set; }
