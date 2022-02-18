@@ -26,9 +26,7 @@ namespace MembersRegistration.Controllers
             return View();
         }
 
-        // POST: UserRegistrations/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+       
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "UserId,UserName,EmailId,Password,ConfirmPassword,IsAdmin")] UserRegistration userRegistration)

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="demoDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="demoDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Members">
           <Key>
             <PropertyRef Name="Id" />
@@ -24,7 +24,7 @@
           <Property Name="Suffix" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="DateOfBirth" Type="datetime" Nullable="false" />
           <Property Name="Gender" Type="nvarchar" MaxLength="15" Nullable="false" />
-          <Property Name="Status" Type="bit" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Relationship">
           <Key>
@@ -116,7 +116,8 @@
             <End Role="ProfileCreation" EntitySet="ProfileCreation" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="demoDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -140,9 +141,9 @@
           <Property Name="Suffix" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Gender" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Relationships" Relationship="Self.ApplicationId" FromRole="ProfileCreation" ToRole="Relationship" />
           <NavigationProperty Name="UserRegistration" Relationship="Self.UserId" FromRole="ProfileCreation" ToRole="UserRegistration" />
-          <Property Name="Status" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Relationship">
           <Key>
@@ -217,7 +218,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="demoDbEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="demoDbEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Members" EntityType="Self.Member" />
           <EntitySet Name="ProfileCreations" EntityType="Self.ProfileCreation" />
           <EntitySet Name="Relationships" EntityType="Self.Relationship" />
@@ -244,7 +245,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="demoDbModelStoreContainer" CdmEntityContainer="demoDbEntities">
+        <EntityContainerMapping StorageEntityContainer="demoDbModelStoreContainer" CdmEntityContainer="demoDbEntities1">
           <EntitySetMapping Name="Members">
             <EntityTypeMapping TypeName="demoDbModel.Member">
               <MappingFragment StoreEntitySet="Members">
@@ -256,7 +257,6 @@
           <EntitySetMapping Name="ProfileCreations">
             <EntityTypeMapping TypeName="demoDbModel.ProfileCreation">
               <MappingFragment StoreEntitySet="ProfileCreation">
-                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
@@ -265,6 +265,7 @@
                 <ScalarProperty Name="Suffix" ColumnName="Suffix" />
                 <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
                 <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

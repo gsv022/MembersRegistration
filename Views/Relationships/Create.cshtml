@@ -37,13 +37,14 @@
             </div>*@
         @foreach (var profile in Model)
         {
+            Console.WriteLine(profile);
             <div class="form-group">
                 <div class="control-label col-md-4  asterisk" title="Relationship"> Relationship with <b>@profile.ApplicationName</b></div>
                 @Html.HiddenFor(model => profile.ApplicationId, new { @Value = profile.ApplicationId })
                 @Html.HiddenFor(model => profile.UserId, new { @Value = profile.UserId })
                 @Html.HiddenFor(model => profile.ApplicationName, new { @Value = profile.ApplicationName })
                 <div class="col-md-8 relationslist-dropdown">
-                    @Html.DropDownListFor(model => profile.RelationId, (SelectList)ViewBag.Members, htmlAttributes: new { @class = "form-control" })
+                    @Html.DropDownListFor(model => profile.RelationId, (SelectList)ViewBag.Members, htmlAttributes: new { @class = "form-control", @required=true })
                 </div>
             </div>
         }

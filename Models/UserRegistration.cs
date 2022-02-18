@@ -22,7 +22,7 @@ namespace MembersRegistration.Models
             this.ProfileCreations = new HashSet<ProfileCreation>();
             this.Relationships = new HashSet<Relationship>();
         }
-    
+
         public long UserId { get; set; }
 
         [Required(ErrorMessage = "The field is required.")]
@@ -32,7 +32,7 @@ namespace MembersRegistration.Models
 
         [Required(ErrorMessage = "The field is required.")]
         [DataType(DataType.EmailAddress, ErrorMessage = "E-mail is not valid")]
-    
+
         [DisplayName("Email id")]
         public string EmailId { get; set; }
 
@@ -55,10 +55,6 @@ namespace MembersRegistration.Models
 
 
 
-
-
-
-    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProfileCreation> ProfileCreations { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

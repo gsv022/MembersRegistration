@@ -70,20 +70,30 @@ namespace MembersRegistration.Controllers
             }
             base.Dispose(disposing);
         }
-        
-        
-      /*  public ActionResult Approve(ProfileCreation q)
+    
+        [HttpPost]
+        public ActionResult Post(IEnumerable<string> applicationIds)
         {
-             var user = db.UserRegistrations.Single(u => u.IsAdmin==true );
-            if (user.IsAdmin == true)
+            try
             {
-                Console.WriteLine(Status.Approved);
-                
+                for (int i = 0; i < applicationIds.Count(); i++)
+                {
+                    var appId = Convert.ToInt64(applicationIds.ToList()[i]); var updateStatus = db.ProfileCreations.SingleOrDefault(x => x.ApplicationId == appId);
+                    updateStatus.Status = 2; //Approved
+                    db.SaveChanges();
+                }
+                return Json(new { success = true });
             }
-            return View("Admin");
-        }*/
+            catch (Exception ex)
+            {
+                return Json(new { error = true });
+            }
+        }
+
+       
 
 
-  
+
+
     }
 }

@@ -11,9 +11,7 @@ namespace MembersRegistration.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Relationship
     {
         public long Id { get; set; }
@@ -24,7 +22,5 @@ namespace MembersRegistration.Models
         public virtual Member Member { get; set; }
         public virtual ProfileCreation ProfileCreation { get; set; }
         public virtual UserRegistration UserRegistration { get; set; }
-
-        
     }
 }

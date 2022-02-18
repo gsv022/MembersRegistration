@@ -21,7 +21,6 @@ namespace MembersRegistration.Models
         {
             this.Relationships = new HashSet<Relationship>();
         }
-       
 
         public long ApplicationId { get; set; }
         public long UserId { get; set; }
@@ -48,13 +47,7 @@ namespace MembersRegistration.Models
 
         [Required(ErrorMessage = "The field is required.")]
         public string Gender { get; set; }
-        public bool Status { get; set; }
-
-
-    
-        
-
-        
+        public int Status { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Relationship> Relationships { get; set; }

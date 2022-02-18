@@ -88,8 +88,8 @@ namespace MembersRegistration.Controllers
                 else
                     orgRelationship.RelationId = relationship.RelationId;
 
-                var updateStatusForProfiles = db.ProfileCreations.SingleOrDefault(x => x.ApplicationId == appId);
-                updateStatusForProfiles.Status = true;
+                var updateStatus = db.ProfileCreations.SingleOrDefault(x => x.ApplicationId == appId);
+                updateStatus.Status = 1; //Submitted
 
                 db.SaveChanges();
                 ViewData["error"] = "Relation updated successfully";
