@@ -12,9 +12,9 @@ namespace MembersRegistration.Controllers
 {
     public class RelationshipsController : Controller
     {
-        private demoDbEntities2 db = new demoDbEntities2();
+        private demoDbEntities db = new demoDbEntities();
 
-         
+
 
         // GET: Relationships
         public ActionResult Index()
@@ -41,9 +41,24 @@ namespace MembersRegistration.Controllers
         // GET: Relationships/Create
         public ActionResult Create()
         {
-            ViewBag.ApplicationId = new SelectList(db.ProfileCreations, "ApplicationId", "FirstName");
-            ViewBag.UserId = new SelectList(db.UserRegistrations, "UserId", "UserName");
-            return View();
+            var userId = GlobalVaribales.UserId;
+
+            ViewBag.UserId = userId;
+            ViewBag.Profiles = db.ProfileCreations.Where(profile => profile.UserId == userId).ToList();
+            ViewBag.Members = new SelectList(db.Members, "Id", "members");
+
+            var updateRelationsList = new List<UpdateRelations>();
+
+            foreach (var name in db.ProfileCreations.Where(profile => profile.UserId == userId).ToList())
+            {
+                var updateRelations = new UpdateRelations();
+                updateRelations.ApplicationId = name.ApplicationId;
+                updateRelations.UserId = name.UserId;
+                updateRelations.ApplicationName = name.FirstName;
+                updateRelationsList.Add(updateRelations);
+            }
+
+            return View(updateRelationsList);
         }
 
         // POST: Relationships/Create
@@ -51,20 +66,46 @@ namespace MembersRegistration.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "RelationId,UserId,ApplicationId,Relation")] Relationship relationship)
+        public ActionResult Create(FormCollection frm)
         {
+            var stuclass = frm.GetValues("profile.ApplicationId");
+            var InstituteId = frm.GetValues("profile.UserId");
+            var obtmark = frm.GetValues("profile.RelationId");
+
+            for (int i = 0; i < stuclass.Count(); i++)
+            {
+                var appId = Convert.ToInt64(stuclass[i]);
+                var relationship = new Relationship()
+                {
+                    ApplicationId = appId,
+                    UserId = Convert.ToInt64(InstituteId[i]),
+                    RelationId = Convert.ToInt64(obtmark[i])
+                };
+                var orgRelationship = db.Relationships.SingleOrDefault(x=> x.ApplicationId == appId);
+
+                if (orgRelationship == null)
+                    db.Relationships.Add(relationship);
+                else
+                    orgRelationship.RelationId = relationship.RelationId;
+
+                var updateStatus = db.ProfileCreations.SingleOrDefault(x => x.ApplicationId == appId);
+                updateStatus.Status = 1; //Submitted
+
+                db.SaveChanges();
+                ViewData["error"] = "Relation updated successfully";
+
+            }
+
             if (ModelState.IsValid)
             {
                 
-                db.Relationships.Add(relationship);
-                db.SaveChanges();
                 return RedirectToAction("Create");
             }
 
-            ViewBag.ApplicationId = new SelectList(db.ProfileCreations, "ApplicationId", "FirstName", relationship.ApplicationId);
-            ViewBag.UserId = new SelectList(db.UserRegistrations, "UserId", "UserName", relationship.UserId);
-
-            return View(relationship);
+            ViewBag.ApplicationId = new SelectList(db.ProfileCreations, "ApplicationId", "FirstName");
+            ViewBag.UserId = new SelectList(db.UserRegistrations, "UserId", "UserName");
+            ViewData["error"] = "Relation updated successfully";
+            return View();
         }
 
         // GET: Relationships/Edit/5
@@ -93,7 +134,7 @@ namespace MembersRegistration.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(relationship).State = EntityState.Modified;
+                db.Entry(relationship).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

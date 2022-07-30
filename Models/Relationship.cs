@@ -14,19 +14,12 @@ namespace MembersRegistration.Models
     
     public partial class Relationship
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Relationship()
-        {
-            this.Members = new HashSet<Member>();
-        }
-    
-        public long RelationId { get; set; }
-        public long UserId { get; set; }
+        public long Id { get; set; }
+        public Nullable<long> UserId { get; set; }
         public long ApplicationId { get; set; }
-        public string Relation { get; set; }
+        public long RelationId { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Member> Members { get; set; }
+        public virtual Member Member { get; set; }
         public virtual ProfileCreation ProfileCreation { get; set; }
         public virtual UserRegistration UserRegistration { get; set; }
     }

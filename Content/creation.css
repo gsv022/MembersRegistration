@@ -18,17 +18,32 @@
     border-radius: 4px;
 }
 .save-btn,.exit-btn {
-    width: 100px !important;
-    height: 40px !important;
     margin-top: 20px;
-    font-size: 16px;
+    font-size: 14px;
 }
 .exit-btn >a, .back-btn>a {
         text-decoration: none;
-        font-size: 16px;
+        font-size: 14px;
         color: white;
     }
-.back-btn{
-    margin-top:30px;
+.nav-btn-area {
+    width: 100% !important;
+    margin-top: 30px;
+}
+.back-btn {
+   
+    text-decoration:none;
+}
+.next-btn {
+    text-decoration: none;
+    margin-left: 52%;
+}
+.prof-form {
+ margin-left:30%;
+ 
+}
+.icon-img{
+    width:40px;
+    height:40px;
 
 }

@@ -12,13 +12,13 @@ namespace MembersRegistration.Controllers
 {
     public class MembersController : Controller
     {
-        private demoDbEntities2 db = new demoDbEntities2();
+        private demoDbEntities db = new demoDbEntities();
 
         // GET: Members
         public ActionResult Index()
         {
-            var members = db.Members.Include(m => m.Relationship);
-            return View(members.ToList());
+            //var members = db.Members.Include(m => m.Relationship);
+            return View();
         }
 
         // GET: Members/Details/5
@@ -57,7 +57,7 @@ namespace MembersRegistration.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.RelationId = new SelectList(db.Relationships, "RelationId", "Relation", member.RelationId);
+            ViewBag.RelationId = new SelectList(db.Relationships, "RelationId", "Relation", member.Id);
             return View(member);
         }
 
@@ -73,7 +73,7 @@ namespace MembersRegistration.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.RelationId = new SelectList(db.Relationships, "RelationId", "Relation", member.RelationId);
+            ViewBag.RelationId = new SelectList(db.Relationships, "RelationId", "Relation", member.Id);
             return View(member);
         }
 
@@ -86,11 +86,11 @@ namespace MembersRegistration.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(member).State = EntityState.Modified;
+                db.Entry(member).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.RelationId = new SelectList(db.Relationships, "RelationId", "Relation", member.RelationId);
+            ViewBag.RelationId = new SelectList(db.Relationships, "RelationId", "Relation", member.Id);
             return View(member);
         }
 

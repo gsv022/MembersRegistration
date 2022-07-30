@@ -14,7 +14,6 @@ namespace MembersRegistration.Models
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
 
-
     public partial class ProfileCreation
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,18 +21,33 @@ namespace MembersRegistration.Models
         {
             this.Relationships = new HashSet<Relationship>();
         }
-    
+
         public long ApplicationId { get; set; }
         public long UserId { get; set; }
 
+        [Required(ErrorMessage = "The field is required.")]
+        [DisplayName("First name")]
         public string FirstName { get; set; }
+
+        [DisplayName("Middle name")]
         public string MiddleName { get; set; }
+
+        [Required(ErrorMessage = "The field is required.")]
+        [DisplayName("Last name")]
         public string LastName { get; set; }
+
+        [Required(ErrorMessage = "The field is required.")]
+        [DisplayName("Salutation")]
         public string Suffix { get; set; }
 
-        [Range(typeof(DateTime), "7/2/1966", "1/1/2022")]
+        [Required(ErrorMessage = "The field is required.")]
+        [DataType(DataType.Date)]
+        [DisplayName("Date of birth")]
         public System.DateTime DateOfBirth { get; set; }
+
+        [Required(ErrorMessage = "The field is required.")]
         public string Gender { get; set; }
+        public int Status { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Relationship> Relationships { get; set; }

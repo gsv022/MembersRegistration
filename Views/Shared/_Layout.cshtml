@@ -1,40 +1,47 @@
-﻿  @using MembersRegistration.Models
+﻿@using MembersRegistration.Models
 <!DOCTYPE html>
 <html>
 <head>
 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+
+    <title>@ViewBag.Title - Household Management System</title>
     <link href="~/Content/SharedLayout.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="~/Scripts/CustomQuery.js"></script>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
 <body>
     <nav class="navbar bg-primary navbar-fixed-top justify-content-between">
+
         <div class="navbar-brand">
-            @Html.ActionLink("Household Management System", "Index", "Home", new { area = "" }, new { @class = "app-name" })
+            @if (Session["UserId"] != null)
+            {
+                <a href="@Url.Action("Admin", "UserRegistrations")" class="back-btn">
+                    <img src="~/Infrastructure/home.png" alt="Back" title="Home" class="home-icon" />
+                </a>
+            }
+
+            @Html.ActionLink("Household Management System", "SignIn", "UserRegistrations", new { area = "" }, new { @class = "app-name" })
+
 
         </div>
-
 
 
         <div class="navbar-right content-right">
             @if (Session["UserId"] != null)
             {
 
-                <h4> Welcome @Session["Username"]!</h4>
-                <div>
-                    <button type="submit">@Html.ActionLink("Logout", "SignIn", "UserRegistrations")</button>
-                </div>
-               // Session.Clear();
-
-
+                <h4> Welcome @Session["Username"]! </h4>
+                <a class="Logout-btn" href="/UserRegistrations/SignIn">Logout</a>
             }
-           
+
 
         </div>
+
 
 
 
@@ -61,6 +68,10 @@
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 
+
 </body>
 
-</html>
+            </html>
+
+
+         
